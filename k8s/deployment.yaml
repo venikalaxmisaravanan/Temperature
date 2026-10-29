@@ -1,26 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: temperature-converter
+  name: temperature
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: temperature-converter
+      app: temperature
   template:
     metadata:
       labels:
-        app: temperature-converter
+        app: temperature
     spec:
       containers:
-        - name: temperature-converter
-          image: temperature-converter:latest
+        - name: temperature
+          image: temperature:v1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 5000
-            initialDelaySeconds: 5
-            periodSeconds: 10
